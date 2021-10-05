@@ -1,3 +1,7 @@
+import kotlin.random.Random
+import kotlin.test.assertEquals
+
+
 fun main(args: Array<String>) {
 //    println("Hello World!")
     println("1.FELADAT");
@@ -34,6 +38,10 @@ fun main(args: Array<String>) {
             print("$i,");
         }
     }
+
+    println("3.FELADAT");
+    println();
+
 
     println("5.FELADAT");
     println();
@@ -94,6 +102,63 @@ fun main(args: Array<String>) {
 
     println("7.FELADAT");
     println();
+    val string = "Mama a legszebb";
+    println(string);
+    val encodedstring = encode(string);
+    val decoded = decode(encodedstring);
+    println("Encoded string: " + encodedstring);
+    println("Decoded string: " + decode(encodedstring));
+    println();
+
+    println("8.FELADAT");
+    println();
+    val stringMutableList = list.toMutableList();
+    val NContains = stringMutableList.filterNot{s -> s.contains('n') };
+    println(NContains);
+    for((index,value) in  NContains.withIndex()){
+        println("Item at $index is $value");
+    }
+    println(NContains.sorted());
+
+    println();
+    println("8.FELADAT");
+    println();
+    val from = 0
+    val to = 100
+    val random = Random
+    var amplititudes  = IntArray(10) { random.nextInt(to - from) +  from };
+    amplititudes.forEach{
+        println("$it");
+    }
+    println(amplititudes.sorted());
+
+    if(amplititudes.anyEvenNum()){
+        println("Contains any even number");
+    }
+    else{
+        println("Not contains any even number");
+    }
+
+    if(amplititudes.allEvenNum()){
+        println("All are even number");
+    }
+    else{
+        println("Not all are even number");
+    }
+
+    var average2 = 0;
+    var num2 = 0;
+    for(i in amplititudes) {
+        average = average + i;
+        num++;
+    };
+    var avg2 = average/num;
+    println("The average of generated numbers: ");
+    amplititudes.forEach{
+        println("$avg2");
+    }
+
+
 
 
 
@@ -101,14 +166,50 @@ fun main(args: Array<String>) {
 //    println("Program arguments: ${args.joinToString()}")
 }
 
-fun isPrime(number: Int): Boolean {
-    if(number<2) return false
-    for (i in 2.toLong()..number/2) {
-        if (number % i == 0.toLong()) {
-            return false
+fun IntArray.anyEvenNum():Boolean{
+    for(i in this){
+        if(i % 2 == 0) {
+            return true;
         }
     }
-    return true
+    return false;
+}
+
+fun IntArray.allEvenNum():Boolean{
+    for(i in this){
+        if(i % 2 != 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
+fun isPrime(number: Int): Boolean {
+    if(number<2) return false;
+    for (i in 2.toLong()..number/2) {
+        if (number % i == 0.toLong()) {
+            return false;
+        }
+    }
+    return true;
 }
 
 fun isEvenNum(myList: List<Int>) =  myList.filter { x -> x % 2 == 0 };
+
+fun encode(string:String): StringBuilder{
+    val newstring = StringBuilder();
+    for(i in string){
+        var i = i+1;
+        newstring.append(i);
+    }
+    return newstring;
+}
+
+fun decode(string:StringBuilder): StringBuilder{
+    val newstring = StringBuilder();
+    for(i in string){
+        var i = i-1;
+        newstring.append(i);
+    }
+    return newstring;
+}
